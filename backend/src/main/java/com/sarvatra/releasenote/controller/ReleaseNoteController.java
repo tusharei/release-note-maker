@@ -25,7 +25,7 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173","https://release-note-maker.netlify.app/"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173","https://release-note-maker.netlify.app"})
 public class ReleaseNoteController {
     
     private final GeminiService geminiService;

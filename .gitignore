@@ -1,0 +1,41 @@
+# Dependencies
+frontend/node_modules/
+
+# Build outputs
+frontend/dist/
+backend/target/
+
+# Logs
+*.log
+frontend/frontend.log
+backend/backend.log
+backend/app.log
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment (sensitive)
+.env
+.env.local
+backend/.env
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Package files
+*.jar
+*.war
+
+# Eclipse
+.classpath
+.project
+.settings/
+.factorypath

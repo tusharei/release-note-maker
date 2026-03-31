@@ -16,7 +16,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # Multi-stage build for Spring Boot backend
-FROM maven:3.9-eclipse-temurin-17 AS backend-builder
+FROM maven:3.9.9-eclipse-temurin-21 AS backend-builder
 
 WORKDIR /app/backend
 
@@ -28,7 +28,7 @@ COPY backend/src ./src
 RUN mvn clean package -DskipTests
 
 # Final production image
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 

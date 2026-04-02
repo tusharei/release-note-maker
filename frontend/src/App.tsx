@@ -156,7 +156,7 @@ function App() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img 
-                src="/public/sarvatraLogo.jpeg" 
+                src="/sarvatraLogo.jpeg" 
                 alt="Sarvatra Logo" 
                 className="h-20 w-auto bg-white p-1 rounded"
               />

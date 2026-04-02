@@ -6,7 +6,28 @@ import type {
   ApiResponse 
 } from '../types';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+// Get API URL from environment variable
+// IMPORTANT: The URL should end with /api (no trailing slash needed)
+const getApiBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  console.log('API Base URL from env:', envUrl);
+  
+  // If no env URL, use localhost
+  if (!envUrl) {
+    console.warn('VITE_API_URL not set, using localhost');
+    return 'http://localhost:8080/api';
+  }
+  
+  // Ensure URL ends with /api (add it if missing)
+  if (!envUrl.endsWith('/api')) {
+    return envUrl + '/api';
+  }
+  
+  return envUrl;
+};
+
+const API_BASE_URL = getApiBaseUrl();
+console.log('Final API Base URL:', API_BASE_URL);
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -14,6 +35,32 @@ const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+// Add request interceptor for debugging
+api.interceptors.request.use(
+  (config) => {
+    console.log('Making request to:', config.baseURL + (config.url || ''));
+    return config;
+  },
+  (error) => {
+    console.error('Request error:', error);
+    return Promise.reject(error);
+  }
+);
+
+// Add response interceptor for debugging
+api.interceptors.response.use(
+  (response) => {
+    console.log('Response received from:', (response.config?.baseURL || '') + (response.config?.url || ''));
+    return response;
+  },
+  (error) => {
+    console.error('Response error:', error.message);
+    console.error('Full URL attempted:', error.config?.url);
+    console.error('Base URL:', error.config?.baseURL);
+    return Promise.reject(error);
+  }
+);
 
 export const beautifyText = async (
   request: BeautifyRequest

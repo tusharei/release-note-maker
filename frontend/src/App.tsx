@@ -113,6 +113,7 @@ function App() {
 
     setIsExporting(true);
     try {
+      console.log('Starting export to:', import.meta.env.VITE_API_URL || 'http://localhost:8080/api');
       const blob = await exportToWord(releaseNote);
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -123,9 +124,17 @@ function App() {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
       showToast('Release note exported successfully!', 'success');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Export failed:', error);
-      showToast('Failed to export release note. Make sure the backend is running.', 'error');
+      // Show more specific error message
+      const errorMessage = error.response?.status === 404 
+        ? 'API endpoint not found. Check VITE_API_URL in Netlify settings.'
+        : error.response?.status === 403
+        ? 'CORS error. Backend may not allow requests from this domain.'
+        : error.response?.status === 500
+        ? 'Backend server error. Check Render logs.'
+        : 'Failed to export release note. Make sure the backend is running.';
+      showToast(errorMessage, 'error');
     } finally {
       setIsExporting(false);
     }

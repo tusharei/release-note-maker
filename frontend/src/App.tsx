@@ -255,7 +255,7 @@ function App() {
 
           <div className="mt-3 flex justify-center items-center gap-2">
             <a
-              href="https://github.com/your-repo-link"
+              href="https://github.com/tusharei/release-note-maker"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition"

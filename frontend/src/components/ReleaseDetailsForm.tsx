@@ -63,7 +63,7 @@ const ReleaseDetailsForm: React.FC<Props> = ({ releaseNote, updateField }) => {
             value={releaseNote.md5sum}
             onFocus={handleFocus}
             onChange={(e) => updateField('md5sum', e.target.value)}
-            placeholder={`jar md5sum...`}
+            placeholder={`jar sha256sum...`}
           />
         </div>
 

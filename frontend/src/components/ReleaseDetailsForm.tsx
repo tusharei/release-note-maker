@@ -57,7 +57,7 @@ const ReleaseDetailsForm: React.FC<Props> = ({ releaseNote, updateField }) => {
 
         {/* MD5Sum */}
         <div>
-          <label className="input-label">MD5Sum</label>
+          <label className="input-label">sha256Sum</label>
           <textarea
             className="input-field h-20 resize-none"
             value={releaseNote.md5sum}
